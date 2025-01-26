@@ -94,6 +94,28 @@ systemd changes
    not for socket files).
    Now all service files must be explicitly added to :term:`FILES`.
 
+Multiconfig changes
+~~~~~~~~~~~~~~~~~~~
+
+-  The value of BB_CURRENT_MC was changed from 'default' to an empty string for the
+   default multiconfig configuration to avoid needing to map the values within bitbake.
+   This was already not happening insome cases so fixes some obscure bugs.
+
+Virtual toolchain provider changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  Support was added for virtual providers on a per recipe basis for specific key toolchain
+   providers listed in BB_VIRTUAL_RECIPE_PROVIDERS. As part of that support, the 'cross'
+   providers were simplified to remove the triplet prefix and generalise the naming, so
+   for example::
+
+     virtual/${TARGET_PREFIX}-binutils - > virtual/cross-bintuils
+     virtual/${TARGET_PREFIX}-gcc - > virtual/cross-cc
+     virtual/${TARGET_PREFIX}-g++ - > virtual/cross-c++
+     virtual/${TARGET_PREFIX}-compilerlibs - > virtual/compilerlibs
+     virtual/${SDK_PREFIX}-binutils - > virtual/nativesdk-cross-binutils
+     virtual/${SDK_PREFIX}-gcc - > virtual/nativesdk-cross-cc
+
 Recipe changes
 ~~~~~~~~~~~~~~
 
